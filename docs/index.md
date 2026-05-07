@@ -5,7 +5,7 @@ hide:
   #- navigation
   - toc
 ---
-![Workspace ONE UEM](../../../assets/logos/UEM-v-lm.png){ align=right }
+![Workspace ONE UEM](assets/logos/UEM-v-lm.png){ align=right }
 
 Each Workspace ONE UEM tenant provides an API/help page that displays all the API commands, parameters and usage, as well as a mechanism to test each call.
 
@@ -15,12 +15,12 @@ Interactive OpenAPI documentation is available per UEM REST release. Each releas
 
 | Release | Documentation | Download |
 |---------|---------------|----------|
-| 2604 | [2604](versions/2604/) | [Bruno ZIP](versions/2604/uem-rest-bruno-2604.zip) |
-| 2602 | [2602](versions/2602/) | [Bruno ZIP](versions/2602/uem-rest-bruno-2602.zip) |
-| 2509 | [2509](versions/2509/) | [Bruno ZIP](versions/2509/uem-rest-bruno-2509.zip) |
-| 2508 | [2508](versions/2508/) | [Bruno ZIP](versions/2508/uem-rest-bruno-2508.zip) |
-| 2506 | [2506](versions/2506/) | [Bruno ZIP](versions/2506/uem-rest-bruno-2506.zip) |
-| 2410 | [2410](versions/2410/) | [Bruno ZIP](versions/2410/uem-rest-bruno-2410.zip) | 
+| 2604 | [2604](versions/2604/index.md) | [Bruno ZIP](versions/2604/uem-rest-bruno-2604.zip) |
+| 2602 | [2602](versions/2602/index.md) | [Bruno ZIP](versions/2602/uem-rest-bruno-2602.zip) |
+| 2509 | [2509](versions/2509/index.md) | [Bruno ZIP](versions/2509/uem-rest-bruno-2509.zip) |
+| 2508 | [2508](versions/2508/index.md) | [Bruno ZIP](versions/2508/uem-rest-bruno-2508.zip) |
+| 2506 | [2506](versions/2506/index.md) | [Bruno ZIP](versions/2506/uem-rest-bruno-2506.zip) |
+| 2410 | [2410](versions/2410/index.md) | [Bruno ZIP](versions/2410/uem-rest-bruno-2410.zip) | 
 
 For each major UEM release, a **Bruno** collection is available as a ZIP in the [REST API reference by release](#rest-api-reference-by-release) table. The collection includes the same API surfaces as the published OpenAPI documents, with environments you can fill in for your tenant.
 
