@@ -1,0 +1,10 @@
+---
+layout: page
+title: MAM API V2 (2509)
+hide:
+  - toc
+---
+
+Workspace ONE UEM MAM REST API V2 — OpenAPI reference for UEM release **2509**.
+
+<swagger-ui src="mamv2.json"/>

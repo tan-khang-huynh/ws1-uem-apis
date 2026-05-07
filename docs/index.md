@@ -1,33 +1,40 @@
 ---
 layout: page
-title: Workspace ONE UEM API
+title: Workspace ONE UEM APIs
 hide:
   #- navigation
   - toc
 ---
 ![Workspace ONE UEM](../../../assets/logos/UEM-v-lm.png){ align=right }
 
-Each Workspace ONE UEM tenant provides an API/help page that displays all the API commands, parameters and usage, as well as a mechanism to test each call. 
+Each Workspace ONE UEM tenant provides an API/help page that displays all the API commands, parameters and usage, as well as a mechanism to test each call.
 
-Omnissa has recently introduced a comprehensive Postman collection for Workspace ONE UEM. This collection includes all available API calls, pre-configured and ready to use, significantly improving workflow efficiency.
+## REST API reference by release
 
-## Getting Started with Workspace ONE UEM API Postman Collection
+Interactive OpenAPI documentation is available per UEM REST release. Each release splits MAM, MCM, MDM, MEM, and System REST surfaces into separate specification files (one OpenAPI document per API family).
 
-The best part about this new Postman collection is how easy it is to get started. In just five minutes, you can fork the collection in your own workspace in Postman, setup environment variables, and begin testing APIs. This efficiency boost allows you to focus more on development and less on setup, driving faster innovation and more reliable implementations.
+| Release | Documentation | Download |
+|---------|---------------|----------|
+| 2604 | [2604](versions/2604/) | [Bruno ZIP](versions/2604/uem-rest-bruno-2604.zip) |
+| 2602 | [2602](versions/2602/) | [Bruno ZIP](versions/2602/uem-rest-bruno-2602.zip) |
+| 2509 | [2509](versions/2509/) | [Bruno ZIP](versions/2509/uem-rest-bruno-2509.zip) |
+| 2508 | [2508](versions/2508/) | [Bruno ZIP](versions/2508/uem-rest-bruno-2508.zip) |
+| 2506 | [2506](versions/2506/) | [Bruno ZIP](versions/2506/uem-rest-bruno-2506.zip) |
+| 2410 | [2410](versions/2410/) | [Bruno ZIP](versions/2410/uem-rest-bruno-2410.zip) | 
 
-### Create Fork from Existing Collection
-The first step is to create a fork of the original collection so that you can make the necessary changes for our own environment.
+For each major UEM release, a **Bruno** collection is available as a ZIP in the [REST API reference by release](#rest-api-reference-by-release) table. The collection includes the same API surfaces as the published OpenAPI documents, with environments you can fill in for your tenant.
 
-1. In Postman, navigate to the Workspace ONE UEM APIs workspace.  
-   ![76200-1119-175655-2](76200-1119-175655-2.png)
-2. Click the three dots next to the parent folder and select **Create a Fork**.  
-   ![76200-1119-175655-3](76200-1119-175655-3.png)
-3. Make sure to include the Workspace ONE UEM API environment. It has placeholders for the variables like Oauth client credentials pre-configured.  
-   ![76200-1119-175655-4](76200-1119-175655-4.png)
-4. Once the fork has been created, switch to the Workspace ONE UEM environment in the upper-right corner.  
-   ![76200-1119-175655-5](76200-1119-175655-5.png)
-5. On the left side of the Postman UI, select variables and open the newly created Workspace ONE UEM environment. You can see a few variables that will be used by the API collection.  
-   ![76200-1119-175655-6](76200-1119-175655-6.png)
+## Getting started with the Bruno collection
+
+You can be up and running in a few minutes: download the archive for your release, open it in **Bruno**, select an environment, and set the variables for your UEM tenant.
+
+### Open the collection in Bruno
+
+1. Download the **Bruno ZIP** for the UEM release you use (see the [table above](#rest-api-reference-by-release)).
+2. Extract the archive, then in Bruno choose **Open Collection** and select the collection folder (the one that contains `bruno.json` if present), or open the folder you use for that release.
+   ![Opening collection in Bruno](images/02-open-collection.png)
+3. In the **Environments** list, select the environment that matches your use case (for example a local or example environment). The collection ships with **variable placeholders** for OAuth and API host values—open the environment editor to see and edit them.
+   ![Selecting development environment](images/03-select-environment.png)
 
 ### Collect Environment Variable Values
 Before making the first API call, you must collect these five items:
@@ -45,10 +52,10 @@ To get these first two values, follow these steps:
 1. In the Workspace ONE UEM admin console, navigate to **Groups and Settings** > **All Settings** > **System** > **Advanced** > **API** > **Rest API**. Make sure you’re in Customer OG or below.
 2. Copy the API key and hostname part of the REST API URL (e.g. as2060).  
    ![76200-1119-175655-7](76200-1119-175655-7.png)
-3. Back in Postman, add these values in the environment variables section:
+3. Back in Bruno, add these values in the **environment** for the collection (variable names may match `YOUR_API_SERVER`, `aw-tenant-code`, or similar—use the names your Bruno environment defines):
    1. YOUR_API_SERVER
    2. Aw-tenant-code  
-   ![76200-1119-175655-8](76200-1119-175655-8.png)
+   ![Adding aw-tenant-code and baseUrl variables](04-configure-aw-tenant-code-and-api-server.png)
 
 #### OAuth token URL
 
@@ -65,10 +72,9 @@ In Workspace ONE UEM admin console, follow these steps.
    ![76200-1119-175655-10](76200-1119-175655-10.png)
 2. Copy the client ID and secret to a text file.  
    ![76200-1119-175655-11](76200-1119-175655-11.png)
-   ![76200-1119-175655-12](76200-1119-175655-12.png)
    Finally, you must obtain a fresh API token.
-3. On the Authorization tab of the parent folder, scroll down and click **Get new access token**.  
-   ![76200-1119-175655-13](76200-1119-175655-13.png)
+3. Configure **OAuth2** (or the collection’s auth flow) on the **collection or folder**: run **Get access token** or the equivalent for client credentials, depending on how the Bruno collection is set up.  
+   ![Configuring OAuth2](images/05-configure-auth)
 
 Now that you have successfully authenticated to Workspace ONE UEM, you have unlocked the access to all the API calls included in the collection.
 
@@ -87,7 +93,7 @@ To find out the purpose of a specific API call, see the documentation section. Y
    ![76200-1119-175655-15](76200-1119-175655-15.png)
 3. In the response body, you will find the available tags for the given Organization Group. Note down the Id value of the tag, you will need it for the final API call to assign a tag.
    Lastly, execute the API call that applies the selected tag to the device, using `{{baseUrl}}/mdm/tags/:tagid/`adddevices, located in MDM API V1 > Tags.
-4. As shown in Postman, the tag ID is a mandatory value. Enter the tag ID from the previous call in the Params tab.  
+4. As shown in Bruno, the tag ID is a mandatory value. Enter the tag ID from the previous call in the request **Params** (or path variables).  
    ![76200-1119-175655-16](76200-1119-175655-16.png)
 5. In the Body tab, add the device ID obtained with the first API call.  
    ![76200-1119-175655-17](76200-1119-175655-17.png)
@@ -96,13 +102,13 @@ To find out the purpose of a specific API call, see the documentation section. Y
 
 ### Error Handling
 
-In case of an error, review the console logs in the lower-left corner of the Postman app.
+In case of an error, review **response** output and any **script / console** output Bruno shows for the request.
 
 ![76200-1119-175655-19](76200-1119-175655-19.png)
 
 ### Additional Considerations
 
-Now that you know which API calls to use to reach our goal, you can proceed to the next step to automate the process if needed. Postman conveniently allows you to export these API calls into various languages, as shown here.
+Now that you know which API calls to use to reach our goal, you can proceed to automate the process if needed. Bruno can **generate code snippets** for requests in several languages from the request view, where supported.
 
 ![76200-1119-175655-20](76200-1119-175655-20.png)
 
@@ -113,7 +119,7 @@ Below is a real-world example of a script built for a customer. In short, it doe
 3. Checks the first five characters of the Asset Number that the user entered during enrollment.
 4. If it can find a tag that matches these 5 characters, that tag is assigned. If no match is found, a fallback tag is assigned.
 
-These tasks that are not natively available in the Workspace ONE UEM console, but can easily be tackled using the provided Postman collection.
+These tasks that are not natively available in the Workspace ONE UEM console, but can easily be tackled using the REST APIs described here (client examples below use PowerShell; adapt as needed for your toolchain).
 
 ```js
 ################################################################################## Parameters
