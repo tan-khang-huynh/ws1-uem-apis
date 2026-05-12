@@ -32,8 +32,10 @@ You can be up and running in a few minutes: download the archive for your releas
 
 1. Download the **Bruno ZIP** for the UEM release you use (see the [table above](#rest-api-reference-by-release)).
 2. Extract the archive, then in Bruno choose **Open Collection** and select the collection folder (the one that contains `bruno.json` if present), or open the folder you use for that release.
+
    ![Opening collection in Bruno](images/02-open-collection.png)
 3. In the **Environments** list, select the environment that matches your use case (for example a local or example environment). The collection ships with **variable placeholders** for OAuth and API host values—open the environment editor to see and edit them.
+
    ![Selecting development environment](images/03-select-environment.png)
 
 ### Collect Environment Variable Values
@@ -50,12 +52,14 @@ Before making the first API call, you must collect these five items:
 To get these first two values, follow these steps:
 
 1. In the Workspace ONE UEM admin console, navigate to **Groups and Settings** > **All Settings** > **System** > **Advanced** > **API** > **Rest API**. Make sure you’re in Customer OG or below.
-2. Copy the API key and hostname part of the REST API URL (e.g. as2060).  
+2. Copy the API key and hostname part of the REST API URL (e.g. as2060).
+
    ![76200-1119-175655-7](76200-1119-175655-7.png)
 3. Back in Bruno, add these values in the **environment** for the collection (variable names may match `YOUR_API_SERVER`, `aw-tenant-code`, or similar—use the names your Bruno environment defines):
    1. YOUR_API_SERVER
-   2. Aw-tenant-code  
-   ![Adding aw-tenant-code and baseUrl variables](04-configure-aw-tenant-code-and-api-server.png)
+   2. Aw-tenant-code
+
+   ![Adding aw-tenant-code and baseUrl variables](./images/04-configure-aw-tenant-code-and-api-server.png)
 
 #### OAuth token URL
 
@@ -68,13 +72,18 @@ See the [Datacenter and Token URLs](https://docs.omnissa.com/bundle/WorkspaceONE
 In Workspace ONE UEM admin console, follow these steps.
 
 1. Navigate to **Group & Settings** > **Configurations** > **OAUTH client management** and click **Add**.  
+
    ![76200-1119-175655-9](76200-1119-175655-9.png)
+
    ![76200-1119-175655-10](76200-1119-175655-10.png)
 2. Copy the client ID and secret to a text file.  
+
    ![76200-1119-175655-11](76200-1119-175655-11.png)
+
    Finally, you must obtain a fresh API token.
 3. Configure **OAuth2** (or the collection’s auth flow) on the **collection or folder**: run **Get access token** or the equivalent for client credentials, depending on how the Bruno collection is set up.  
-   ![Configuring OAuth2](images/05-configure-auth)
+
+   ![Configuring OAuth2](./images/05-configure-auth.png)
 
 Now that you have successfully authenticated to Workspace ONE UEM, you have unlocked the access to all the API calls included in the collection.
 
@@ -85,19 +94,27 @@ Let's see how to achieve this simple goal without touching the UEM console: find
 First, start with a request that returns the devices you are looking for. The API call `{{baseUrl}}/mdm/devices/`search sounds like the correct one.
 
 To find out the purpose of a specific API call, see the documentation section. You will find a short description and additional details for mandatory and optional parameters.
+
 ![76200-1119-175655-14](76200-1119-175655-14.png)
 
 1. Copy the values of the `LocationGroupId` and device `Id` (located near the end) attributes in the response body, you will use these values later.
-2. The next step would be to obtain the available tags from UEM. This requires the following API: `{{baseUrl}}/system/groups/:id/tags`, which is located under System API V1 > Tags.
-   In the documentation section of this API, the PATH variable mentioned is mandatory, so the Organization Group ID value obtained with the previous call needs to be added to the Params tab.  
+2. The next step would be to obtain the available tags from UEM. This requires the following API: `{{baseUrl}}/system/groups/:id/tags`, which is located under **System API V1 > Tags**.
+   In the documentation section of this API, the PATH variable mentioned is mandatory, so the ***Organization Group ID*** value obtained with the previous call needs to be added to the Params tab.  
+
    ![76200-1119-175655-15](76200-1119-175655-15.png)
+
 3. In the response body, you will find the available tags for the given Organization Group. Note down the Id value of the tag, you will need it for the final API call to assign a tag.
-   Lastly, execute the API call that applies the selected tag to the device, using `{{baseUrl}}/mdm/tags/:tagid/`adddevices, located in MDM API V1 > Tags.
-4. As shown in Bruno, the tag ID is a mandatory value. Enter the tag ID from the previous call in the request **Params** (or path variables).  
+   Lastly, execute the API call that applies the selected tag to the device, using `{{baseUrl}}/mdm/tags/:tagid/`adddevices, located in **MDM API V1 > Tags**.
+4. As shown in Bruno, the ***tag ID*** is a mandatory value. Enter the tag ID from the previous call in the request **Params** (or path variables).  
+
    ![76200-1119-175655-16](76200-1119-175655-16.png)
+
 5. In the Body tab, add the device ID obtained with the first API call.  
+
    ![76200-1119-175655-17](76200-1119-175655-17.png)
+
 6. Click send and check the UEM console for the result.  
+
    ![76200-1119-175655-18](76200-1119-175655-18.png)
 
 ### Error Handling
@@ -121,7 +138,7 @@ Below is a real-world example of a script built for a customer. In short, it doe
 
 These tasks that are not natively available in the Workspace ONE UEM console, but can easily be tackled using the REST APIs described here (client examples below use PowerShell; adapt as needed for your toolchain).
 
-```js
+```powershell
 ################################################################################## Parameters
 
 #################################################################################
