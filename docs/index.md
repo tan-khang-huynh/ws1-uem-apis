@@ -5,7 +5,10 @@ hide:
   #- navigation
   - toc
 ---
-![Workspace ONE UEM](../../../assets/logos/UEM-v-lm.png){ align=right }
+![Workspace ONE UEM](../assets/logos/UEM-v-lm.png){ align=right }
+
+!!! warning "Postman support deprecation"
+    Postman collection support will be **deprecated on August 1, 2026**. We recommend migrating to the [Bruno collection](bruno.md), which provides the same functionality with an open-source, offline-first client.
 
 Each Workspace ONE UEM tenant provides an API/help page that displays all the API commands, parameters and usage, as well as a mechanism to test each call. 
 
@@ -19,15 +22,15 @@ The best part about this new Postman collection is how easy it is to get started
 The first step is to create a fork of the original collection so that you can make the necessary changes for our own environment.
 
 1. In Postman, navigate to the Workspace ONE UEM APIs workspace.  
-   ![76200-1119-175655-2](76200-1119-175655-2.png)
+   <img src="76200-1119-175655-2.png" alt="76200-1119-175655-2" style="display:block; margin-top:0.5rem;" />
 2. Click the three dots next to the parent folder and select **Create a Fork**.  
-   ![76200-1119-175655-3](76200-1119-175655-3.png)
+   <img src="76200-1119-175655-3.png" alt="76200-1119-175655-3" style="display:block; margin-top:0.5rem;" />
 3. Make sure to include the Workspace ONE UEM API environment. It has placeholders for the variables like Oauth client credentials pre-configured.  
-   ![76200-1119-175655-4](76200-1119-175655-4.png)
+   <img src="76200-1119-175655-4.png" alt="76200-1119-175655-4" style="display:block; margin-top:0.5rem;" />
 4. Once the fork has been created, switch to the Workspace ONE UEM environment in the upper-right corner.  
-   ![76200-1119-175655-5](76200-1119-175655-5.png)
+   <img src="76200-1119-175655-5.png" alt="76200-1119-175655-5" style="display:block; margin-top:0.5rem;" />
 5. On the left side of the Postman UI, select variables and open the newly created Workspace ONE UEM environment. You can see a few variables that will be used by the API collection.  
-   ![76200-1119-175655-6](76200-1119-175655-6.png)
+   <img src="76200-1119-175655-6.png" alt="76200-1119-175655-6" style="display:block; margin-top:0.5rem;" />
 
 ### Collect Environment Variable Values
 Before making the first API call, you must collect these five items:
@@ -44,11 +47,11 @@ To get these first two values, follow these steps:
 
 1. In the Workspace ONE UEM admin console, navigate to **Groups and Settings** > **All Settings** > **System** > **Advanced** > **API** > **Rest API**. Make sure you’re in Customer OG or below.
 2. Copy the API key and hostname part of the REST API URL (e.g. as2060).  
-   ![76200-1119-175655-7](76200-1119-175655-7.png)
+   <img src="76200-1119-175655-7.png" alt="76200-1119-175655-7" style="display:block; margin-top:0.5rem;" />
 3. Back in Postman, add these values in the environment variables section:
    1. YOUR_API_SERVER
    2. Aw-tenant-code  
-   ![76200-1119-175655-8](76200-1119-175655-8.png)
+   <img src="76200-1119-175655-8.png" alt="76200-1119-175655-8" style="display:block; margin-top:0.5rem;" />
 
 #### OAuth token URL
 
@@ -61,14 +64,14 @@ See the [Datacenter and Token URLs](https://docs.omnissa.com/bundle/WorkspaceONE
 In Workspace ONE UEM admin console, follow these steps.
 
 1. Navigate to **Group & Settings** > **Configurations** > **OAUTH client management** and click **Add**.  
-   ![76200-1119-175655-9](76200-1119-175655-9.png)
-   ![76200-1119-175655-10](76200-1119-175655-10.png)
+   <img src="76200-1119-175655-9.png" alt="76200-1119-175655-9" style="display:block; margin-top:0.5rem;" />
+   <img src="76200-1119-175655-10.png" alt="76200-1119-175655-10" style="display:block; margin-top:0.5rem;" />
 2. Copy the client ID and secret to a text file.  
-   ![76200-1119-175655-11](76200-1119-175655-11.png)
-   ![76200-1119-175655-12](76200-1119-175655-12.png)
+   <img src="76200-1119-175655-11.png" alt="76200-1119-175655-11" style="display:block; margin-top:0.5rem;" />
+   <img src="76200-1119-175655-12.png" alt="76200-1119-175655-12" style="display:block; margin-top:0.5rem;" />
    Finally, you must obtain a fresh API token.
 3. On the Authorization tab of the parent folder, scroll down and click **Get new access token**.  
-   ![76200-1119-175655-13](76200-1119-175655-13.png)
+   <img src="76200-1119-175655-13.png" alt="76200-1119-175655-13" style="display:block; margin-top:0.5rem;" />
 
 Now that you have successfully authenticated to Workspace ONE UEM, you have unlocked the access to all the API calls included in the collection.
 
@@ -79,20 +82,20 @@ Let's see how to achieve this simple goal without touching the UEM console: find
 First, start with a request that returns the devices you are looking for. The API call `{{baseUrl}}/mdm/devices/`search sounds like the correct one.
 
 To find out the purpose of a specific API call, see the documentation section. You will find a short description and additional details for mandatory and optional parameters.
-![76200-1119-175655-14](76200-1119-175655-14.png)
+<img src="76200-1119-175655-14.png" alt="Where to find API documentation" style="display:block; margin-top:0.5rem;" />
 
 1. Copy the values of the `LocationGroupId` and device `Id` (located near the end) attributes in the response body, you will use these values later.
 2. The next step would be to obtain the available tags from UEM. This requires the following API: `{{baseUrl}}/system/groups/:id/tags`, which is located under System API V1 > Tags.
    In the documentation section of this API, the PATH variable mentioned is mandatory, so the Organization Group ID value obtained with the previous call needs to be added to the Params tab.  
-   ![76200-1119-175655-15](76200-1119-175655-15.png)
+   <img src="76200-1119-175655-15.png" alt="76200-1119-175655-15" style="display:block; margin-top:0.5rem;" />
 3. In the response body, you will find the available tags for the given Organization Group. Note down the Id value of the tag, you will need it for the final API call to assign a tag.
    Lastly, execute the API call that applies the selected tag to the device, using `{{baseUrl}}/mdm/tags/:tagid/`adddevices, located in MDM API V1 > Tags.
 4. As shown in Postman, the tag ID is a mandatory value. Enter the tag ID from the previous call in the Params tab.  
-   ![76200-1119-175655-16](76200-1119-175655-16.png)
+   <img src="76200-1119-175655-16.png" alt="76200-1119-175655-16" style="display:block; margin-top:0.5rem;" />
 5. In the Body tab, add the device ID obtained with the first API call.  
-   ![76200-1119-175655-17](76200-1119-175655-17.png)
+   <img src="76200-1119-175655-17.png" alt="76200-1119-175655-17" style="display:block; margin-top:0.5rem;" />
 6. Click send and check the UEM console for the result.  
-   ![76200-1119-175655-18](76200-1119-175655-18.png)
+   <img src="76200-1119-175655-18.png" alt="76200-1119-175655-18" style="display:block; margin-top:0.5rem;" />
 
 ### Error Handling
 
